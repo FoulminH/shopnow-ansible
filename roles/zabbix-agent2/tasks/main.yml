@@ -1,0 +1,38 @@
+# Tasks for zabbix agent2 installation
+#
+#
+- name: Install dependencies
+  package:
+    name: ['curl', 'gcc', 'make']
+    state: present
+
+- name: Download and install zabbix repo
+  apt:
+    deb: https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-2+debian12_all.deb
+  when: ansible_os_family == "Debian"
+
+- name: Install zabbix-agent2
+  apt:
+    pkg:
+    - zabbix-agent2
+    - zabbix-agent2-plugin-*
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Stop zabbix-agent2
+  service:
+    name: zabbix-agent2
+    state: stopped
+
+- name: Check zabbix user, home dir and shell
+  user:
+    name: zabbix
+    state: present
+
+- name: Generate config file from template
+  template:
+    src: zabbix-agent2.j2
+    dest: /etc/zabbix/zabbix_agent2.conf
+    mode: 0644
+  notify: Restart and enable zabbix-agent2
+

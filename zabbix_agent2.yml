@@ -1,0 +1,16 @@
+# zabbix agent2 install playbook by mnguyen
+#
+#
+- name: Install Zabbix Agent On Linux Hosts
+  hosts: zabbix_agents2_linux 
+  become: true
+  
+  vars:
+    zabbix_agent_Server: 10.10.0.50
+    zabbix_agent_ServerActive: 10.10.0.50
+    zabbix_agent_HostnameItem: system.hostname
+    zabbix_agent_HostMetadataItem: system.uname
+    zabbix_agent_AllowKey: system.run[*]
+
+  roles:
+    - zabbix-agent2

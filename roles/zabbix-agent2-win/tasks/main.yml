@@ -1,0 +1,9 @@
+# Tasks for zabbix agent2 installation
+#
+#
+
+- name: Ping
+  package:
+    name: ['curl', 'gcc', 'make']
+    state: present
+

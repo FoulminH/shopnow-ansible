@@ -1,0 +1,17 @@
+# zabbix agent2 install playbook by mnguyen
+#
+#
+
+- name: Install Zabbix Agent on Windows hosts
+  hosts: zabbix_agents2_win
+  become: true
+  
+  vars:
+    zabbix_agent_Server: 10.10.0.50
+    zabbix_agent_Server_Active: 10.10.0.50
+    zabbix_agent_HostnameItem: system.hostname
+    zabbix_agent_HostMetadataItem: system.uname
+    zabbix_agent_AllowKey: system.run[*]
+
+  roles:
+    - zabbix-agent2-win
