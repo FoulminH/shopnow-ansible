@@ -1,0 +1,5 @@
+---
+# vars file for roles/uninstall-zabbix-agent2-win
+zabbix_agent2_product_name: "Zabbix Agent 2 (64-bit)"
+zabbix_agent2_service_name: "Zabbix Agent 2"
+zabbix_agent2_program_dir: "C:\\Program Files\\Zabbix Agent 2"

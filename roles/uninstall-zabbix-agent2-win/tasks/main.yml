@@ -1,0 +1,25 @@
+# tasks file for roles/uninstall-zabbix-agent2-win
+---
+
+- name: Stop Zabbix Agent 2 service
+  win_service:
+    name: "{{ zabbix_agent2_service_name }}"
+    state: stopped
+  ignore_errors: yes
+
+- name: Uninstall Zabbix Agent 2
+  win_package:
+    path: 'C:\Temp\zabbix_agent2.msi'
+    state: absent
+
+- name: Remove Zabbix Agent 2 program directory
+  win_file:
+    path: "{{ zabbix_agent2_program_dir }}"
+    state: absent
+  ignore_errors: yes
+
+- name: Remove downloaded installer if present
+  win_file:
+    path: "C:\\Temp\\zabbix_agent2.msi"
+    state: absent
+  ignore_errors: yes
