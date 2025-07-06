@@ -8,7 +8,9 @@
 #
 # groups here
 [zabbix_agents2_linux]
-10.10.0.30 #par-srv-deb-web-01
+10.10.0.41 # par-srv-haproxy-01
+10.10.0.42 # par-srv-haproxy-02
+10.10.0.45 # par-srv-docker-01
 
 [zabbix_agents2_windows]
-10.10.0.200 #par-srv-ad-01
+10.10.0.183 # PC-MARK
