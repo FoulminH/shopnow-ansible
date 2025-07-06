@@ -2,7 +2,7 @@
 #
 #
 ---
-- name: Install Zabbix Agent on Windows hosts
+- name: Manage Zabbix Agent on Windows hosts
   hosts: zabbix_agents2_windows
   vars_files: 
     - group_vars/zabbix_agents2_windows.yml
@@ -14,4 +14,6 @@
     zabbix_agent_AllowKey: system.run[*]
 
   roles:
-    - zabbix-agent2-win
+    - { name: zabbix-agent2-win, tags: [install] }
+    - { name: uninstall-zabbix-agent2-win, tags: [uninstall] }
+

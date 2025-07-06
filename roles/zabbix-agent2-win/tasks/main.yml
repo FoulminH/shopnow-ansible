@@ -22,7 +22,7 @@
       SERVERACTIVE="{{ zabbix_agent_ServerActive }}"
       HOSTNAMEITEM="{{ zabbix_agent_HostnameItem }}"
       HOSTMETADATAITEM="{{ zabbix_agent_HostMetadataItem }}"
-      ALLOWDENYKEY="{{ zabbix_agent_AllowKey }}"
+      ALLOWDENYKEY="AllowKey=system.run[*]"
 
 - name: Stop Zabbix Agent 2 before reconfig
   win_service:
