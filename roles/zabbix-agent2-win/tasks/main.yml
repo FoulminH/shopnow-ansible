@@ -2,8 +2,36 @@
 #
 #
 
-- name: Ping
-  package:
-    name: ['curl', 'gcc', 'make']
+- name: Ensure temp directory exists
+  win_file:
+    path: C:\Temp
+    state: directory
+
+- name: Download Zabbix Agent 2 MSI
+  win_get_url:
+    url: "https://cdn.zabbix.com/zabbix/binaries/stable/7.4/7.4.0/zabbix_agent2-7.4.0-windows-amd64-openssl.msi"
+    dest: "C:\\Temp\\zabbix_agent2.msi"
+    force: yes
+
+- name: Install Zabbix Agent 2
+  win_package:
+    path: "C:\\Temp\\zabbix_agent2.msi"
     state: present
+    arguments: >-
+      SERVER="{{ zabbix_agent_Server }}"
+      SERVERACTIVE="{{ zabbix_agent_ServerActive }}"
+      HOSTNAMEITEM="{{ zabbix_agent_HostnameItem }}"
+      HOSTMETADATAITEM="{{ zabbix_agent_HostMetadataItem }}"
+      ALLOWDENYKEY="{{ zabbix_agent_AllowKey }}"
+
+- name: Stop Zabbix Agent 2 before reconfig
+  win_service:
+    name: "Zabbix Agent 2"
+    state: stopped
+
+- name: Generate config file from template (Windows)
+  win_template:
+    src: zabbix-agent2.j2
+    dest: 'C:\Program Files\Zabbix Agent 2\zabbix_agent2.conf'
+  notify: Restart and enable Zabbix Agent 2 (Windows)
 

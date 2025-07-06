@@ -1,0 +1,6 @@
+---
+- name: Restart and enable Zabbix Agent 2 (Windows)
+  win_service:
+    name: "Zabbix Agent 2"
+    state: restarted
+    start_mode: auto

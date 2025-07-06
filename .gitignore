@@ -3,3 +3,4 @@ group_vars/
 inventory/hosts
 logfile.log
 ansible.cfg
+vault/
